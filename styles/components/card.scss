@@ -1,0 +1,15 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+
+  &__name-price-info {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__image {
+    object-fit: cover;
+    height: 200px;
+  }
+}
