@@ -2,14 +2,20 @@ import MainLayout from "../../layouts/mainLayout";
 import { Card } from "../../components";
 import { PrismaClient } from "@prisma/client"
 import styles from "../../styles/Store.module.css"
+import { useRouter } from 'next/router'
 
 const prisma = new PrismaClient()
 
 const Store = ({ products }) => {
+    const router = useRouter()
     console.log(products)
 
     const handleBuyButtonClick = (id) => {
-      console.log(id)
+        console.log(id)
+        router.push({
+            pathname: `${router.pathname}/add`,
+            query: { id },
+        })
     }
 
     const productsList = products.map(product =>
