@@ -8,11 +8,15 @@ const prisma = new PrismaClient()
 const Store = ({ products }) => {
     console.log(products)
 
-    const handleBuyButtonClick = () => {
-        console.log("added")
+    const handleBuyButtonClick = (id) => {
+      console.log(id)
     }
 
-    const productsList = products.map(product => <Card key={product.id} {...product} imageSrc={product.imageSrc} onBuyButtonClick={handleBuyButtonClick} />)
+    const productsList = products.map(product =>
+      <Card key={product.id}
+            {...product}
+            onBuyButtonClick={handleBuyButtonClick}
+      />)
 
     return (
         <MainLayout>

@@ -6,7 +6,7 @@
   background-color: var(--chocolate-color);
 
   &__item {
-    font-size: 1.2rem;
+    font-size: calc(1.1rem + 1vw);
     font-weight: 500;
     color: var(--basic-white);
     padding: 2vh 2vw;
