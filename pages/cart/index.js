@@ -4,7 +4,7 @@ import MainLayout from "../../layouts/mainLayout";
 const Cart = () => {
     return (
         <MainLayout className={styles.class1}>
-            aqwe
+            Cart
         </MainLayout>
     )
 }
