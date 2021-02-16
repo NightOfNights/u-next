@@ -1,0 +1,21 @@
+.add {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: auto;
+    width: 20%;
+    padding-top: 20vh;
+    gap: 10px;
+}
+
+.add span {
+    text-align: center;
+}
+
+.add__box {
+    margin: 0 20%;
+}
+
+.add__button {
+    width: 100%;
+}

@@ -1,10 +1,8 @@
 import MainLayout from "../../layouts/mainLayout";
 import { Card } from "../../components";
-import { PrismaClient } from "@prisma/client"
 import styles from "../../styles/Store.module.css"
 import { useRouter } from 'next/router'
-
-const prisma = new PrismaClient()
+import { prisma } from "../../prisma/prisma";
 
 const Store = ({ products }) => {
     const router = useRouter()
