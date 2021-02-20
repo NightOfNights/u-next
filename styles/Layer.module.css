@@ -1,21 +1,20 @@
-.add {
+.layer {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     margin: auto;
     width: 20%;
     padding-top: 20vh;
     gap: 10px;
 }
 
-.add span {
+.layer span {
     text-align: center;
 }
 
-.add__box {
+.layer__box {
     margin: 0 20%;
 }
 
-.add__button {
+.layer__button {
     width: 100%;
 }

@@ -2,6 +2,7 @@ import MainLayout from "../../layouts/mainLayout";
 import { prisma } from "../../prisma/prisma";
 import { Button } from "@material-ui/core";
 import { useRouter } from "next/router"
+import styles from "../../styles/Cart.module.css"
 
 const Cart = ({ cartProducts }) => {
     const router = useRouter()
@@ -10,19 +11,28 @@ const Cart = ({ cartProducts }) => {
         router.push(`${router.pathname}/del`)
     }
 
-    const cartProductList = cartProducts.map(product =>
-        <li key={product.name + product.imageSrc}>
-            {product.name}
+    const cartProductList = cartProducts.map((product, index) =>
+        <li key={product.name + product.imageSrc} className={styles.cart__item}>
+            <img src={product.imageSrc} alt="img" className={styles.cart__image} />
+            {product.name} x { product.amount }
         </li>
     )
 
     const sumAmount = cartProducts.reduce((sum, current) => sum + current.price * current.amount, 0)
+    const totalCost = sumAmount === 0
+        ? <span className={styles.cart__empty}>Cart is empty</span>
+        : <span className={styles.cart__totalCost}>Total cost: {sumAmount.toFixed(2)} $</span>
 
     return (
         <MainLayout>
-            {cartProductList}
-            {sumAmount.toFixed(2)} $
-            <Button variant="outlined" onClick={handleButtonClick}>Clear cart</Button>
+            <div className={styles.cart}>
+                <div>
+                    {cartProductList}
+                </div>
+                {totalCost}
+                <Button variant="outlined" onClick={handleButtonClick}>Clear cart</Button>
+                <Button variant="outlined">OK</Button>
+            </div>
         </MainLayout>
     )
 }

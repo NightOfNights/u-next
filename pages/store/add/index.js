@@ -1,7 +1,7 @@
 import MainLayout from "../../../layouts/mainLayout";
 import { useRouter } from "next/router"
 import { Box, Button } from "@material-ui/core";
-import styles from "../../../styles/AddToCart.module.css"
+import styles from "../../../styles/Layer.module.css"
 import { prisma } from "../../../prisma/prisma"
 
 const AddToCart = ({ product }) => {
