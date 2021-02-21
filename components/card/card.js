@@ -16,7 +16,7 @@ const Card = ({ id, name, price, description, imageSrc, rating, onBuyButtonClick
                 <span>{`${price} $`}</span>
             </div>
             <span className="card__description">{description}</span>
-            <Rating name="product-value" value={rating} precision={0.5} readOnly size="small" />
+            <Rating name="product-value" value={rating} precision={0.5} readOnly size="small" className="card__rating" />
             <Button variant="outlined" onClick={handleBuyButtonClick} className="card__button">Buy</Button>
         </div>
     )

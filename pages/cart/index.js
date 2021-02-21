@@ -26,12 +26,11 @@ const Cart = ({ cartProducts }) => {
     return (
         <MainLayout>
             <div className={styles.cart}>
-                <div>
-                    {cartProductList}
-                </div>
+                <span className={styles.cart__header}>Your cart</span>
+                {cartProductList}
                 {totalCost}
                 <Button variant="outlined" onClick={handleButtonClick}>Clear cart</Button>
-                <Button variant="outlined">OK</Button>
+                <Button variant="outlined" onClick={() => {router.push("/store")}}>OK</Button>
             </div>
         </MainLayout>
     )

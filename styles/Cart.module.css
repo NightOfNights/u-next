@@ -2,14 +2,21 @@
     display: flex;
     flex-direction: column;
     margin: auto;
-    gap: 10px;
+    gap: 20px;
     width: 25%;
     position: relative;
     top: 5vh;
 }
 
-.cart > * {
+.cart * {
     margin: 0 10px;
+}
+
+.cart__header {
+    font-size: 1.75rem;
+    font-weight: lighter;
+    text-align: center;
+    margin: 30px;
 }
 
 .cart__item {
@@ -17,13 +24,16 @@
     justify-content: space-between;
     align-items: center;
     list-style: none;
-    padding-bottom: 5px;
+    padding: 5px 0;
     border-bottom: 1px solid var(--light-gray);
+    font-size: 1.1rem;
 }
 
 .cart__totalCost {
     display: block;
     margin-left: auto;
+    font-size: 1.2rem;
+    font-weight: bold;
 }
 
 .cart__empty {

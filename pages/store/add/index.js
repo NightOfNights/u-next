@@ -13,10 +13,10 @@ const AddToCart = ({ product }) => {
 
     return (
         <MainLayout>
-            <div className={styles.add}>
+            <div className={styles.layer}>
                 <span>{product.name} was added to the cart</span>
-                <Box textAlign="center" className={styles.add__box}>
-                    <Button variant="outlined" onClick={handleButtonClick} className={styles.add__button}>Ok</Button>
+                <Box textAlign="center" className={styles.layer__box}>
+                    <Button variant="outlined" onClick={handleButtonClick} className={styles.layer__button}>Ok</Button>
                 </Box>
             </div>
         </MainLayout>
