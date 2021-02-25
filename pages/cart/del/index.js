@@ -1,15 +1,15 @@
-import MainLayout from "../../../layouts/mainLayout";
-import { useRouter } from "next/router"
-import { Box, Button } from "@material-ui/core";
-import styles from "../../../styles/Layer.module.css"
-import { prisma } from "../../../prisma/prisma";
+import MainLayout from '../../../layouts/mainLayout';
+import { useRouter } from 'next/router';
+import { Box, Button } from '@material-ui/core';
+import styles from '../../../styles/Layer.module.css';
+import { prisma } from '../../../prisma/prisma';
 
 const ClearCart = () => {
-    const router = useRouter()
+    const router = useRouter();
 
     const handleButtonClick = () => {
-        router.push("/store")
-    }
+        router.push('/store');
+    };
 
     return (
         <MainLayout>
@@ -20,12 +20,12 @@ const ClearCart = () => {
                 </Box>
             </div>
         </MainLayout>
-    )
-}
+    );
+};
 
-export const getServerSideProps = async ({ query }) => {
-    await prisma.cart.deleteMany({})
-    return { props: {}}
-}
+export const getServerSideProps = async () => {
+    await prisma.cart.deleteMany({});
+    return { props: {}};
+};
 
 export default ClearCart;

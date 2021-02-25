@@ -1,6 +1,6 @@
-import Navbar from "../components/navbar/navbar";
-import React from "react";
-import Head from "next/head";
+import Navbar from '../components/navbar/navbar';
+import React from 'react';
+import Head from 'next/head';
 
 const MainLayout = ({ children }) => {
     return (
@@ -14,7 +14,7 @@ const MainLayout = ({ children }) => {
             {children}
           </main>
         </React.Fragment>
-    )
-}
+    );
+};
 
 export default MainLayout;

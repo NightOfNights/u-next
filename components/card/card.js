@@ -5,8 +5,8 @@ import Rating from '@material-ui/lab/Rating';
 const Card = ({ id, name, price, description, imageSrc, rating, onBuyButtonClick }) => {
 
     const handleBuyButtonClick = () => {
-        onBuyButtonClick(id)
-    }
+        onBuyButtonClick(id);
+    };
 
     return (
         <div className="card">
@@ -19,7 +19,7 @@ const Card = ({ id, name, price, description, imageSrc, rating, onBuyButtonClick
             <Rating name="product-value" value={rating} precision={0.5} readOnly size="small" className="card__rating" />
             <Button variant="outlined" onClick={handleBuyButtonClick} className="card__button">Buy</Button>
         </div>
-    )
-}
+    );
+};
 
 export default Card;
