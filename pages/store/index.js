@@ -1,19 +1,13 @@
 import MainLayout from '../../layouts/mainLayout';
 import { Card } from '../../components';
 import styles from '../../styles/Store.module.css';
-import { useRouter } from 'next/router';
-import { prisma } from '../../prisma/prisma';
+import { getProducts, addProductToCart } from '../../api/apiRequests';
 
 const Store = ({ products }) => {
-    const router = useRouter();
     console.log(products);
 
     const handleBuyButtonClick = (id) => {
-        console.log(id);
-        router.push({
-            pathname: `${router.pathname}/add`,
-            query: { id },
-        });
+        addProductToCart(id);
     };
 
     const productsList = products.map(product =>
@@ -32,10 +26,7 @@ const Store = ({ products }) => {
 };
 
 export const getServerSideProps = async () => {
-    //  skip: 3,
-    //  take: 4 (pagination)
-    const products = await prisma.products.findMany();
-
+    const products = await getProducts();
     return { props: { products } };
 };
 

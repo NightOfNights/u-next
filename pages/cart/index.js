@@ -1,21 +1,26 @@
 import MainLayout from '../../layouts/mainLayout';
-import { prisma } from '../../prisma/prisma';
 import { Button } from '@material-ui/core';
 import { useRouter } from 'next/router';
+import { CartProduct } from '../../components';
+import axios from '../../api/axiosConfig';
 import styles from '../../styles/Cart.module.css';
+import { getCart, clearCart } from '../../api/apiRequests';
 
 const Cart = ({ cartProducts }) => {
     const router = useRouter();
 
-    const handleButtonClick = () => {
-        router.push(`${router.pathname}/del`);
+    const handleClearCartButtonClick = () => {
+        if (cartProducts.length) {
+            clearCart();
+            router.push(router.pathname);
+        }
+        else {
+            alert('Cart is already empty!');
+        }
     };
 
     const cartProductList = cartProducts.map(product =>
-        <li key={product.name + product.imageSrc} className={styles.cart__item}>
-            <img src={product.imageSrc} alt="img" className={styles.cart__image} />
-            {product.name} x { product.amount }
-        </li>
+        <CartProduct key={product.id} product={product} />
     );
 
     const sumAmount = cartProducts.reduce((sum, current) => sum + current.price * current.amount, 0);
@@ -29,7 +34,7 @@ const Cart = ({ cartProducts }) => {
                 <span className={styles.cart__header}>Your cart</span>
                 {cartProductList}
                 {totalCost}
-                <Button variant="outlined" onClick={handleButtonClick}>Clear cart</Button>
+                <Button variant="outlined" onClick={handleClearCartButtonClick}>Clear cart</Button>
                 <Button variant="outlined" onClick={() => {router.push('/store');}}>OK</Button>
             </div>
         </MainLayout>
@@ -37,7 +42,7 @@ const Cart = ({ cartProducts }) => {
 };
 
 export const getServerSideProps = async () => {
-    const cartProducts = await prisma.$queryRaw('SELECT p.name, p.price, p."imageSrc", c.amount FROM products p JOIN cart c on p.id = c."productId"');
+    const cartProducts = await getCart();
     console.log(cartProducts);
 
     return { props: { cartProducts } };
