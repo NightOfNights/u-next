@@ -1,36 +1,47 @@
 import axios from './axiosConfig';
 
 export async function getProducts() {
-  const products = await axios.get('/products').then(res => res.data);
+  const products = await axios.get('/products').then((res) => res.data);
   return products;
 }
 
 export async function getCart() {
-  const cart = await axios.get('/cart').then(res => res.data); 
+  const cart = await axios.get('/cart').then((res) => res.data);
   return cart;
 }
 
 export const clearCart = () => {
-  axios.delete('/cart')
-  .then((res) => {
+  axios
+    .delete('/cart')
+    .then((res) => {
       console.log(res);
       alert('Cart cleared');
-  })
-  .catch((err) => {
+    })
+    .catch((err) => {
       console.log(err);
       alert(err.message);
-  });
+    });
+};
+
+export const deleteCartProduct = (id) => {
+  axios
+    .delete(`/cart/${id}`)
+    .then((res) => console.log(res))
+    .catch((err) => {
+      console.log(err);
+      alert(err.message);
+    });
 };
 
 export const addProductToCart = (id) => {
-  axios.put(`/cart/${id}`)
-  .then((res) => {
+  axios
+    .put(`/cart/${id}`)
+    .then((res) => {
       console.log(res);
       alert('Product added to the cart!');
-  })
-  .catch((err) => {
+    })
+    .catch((err) => {
       console.log(err);
       alert(err.message);
-  });
+    });
 };
-

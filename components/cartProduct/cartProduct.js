@@ -1,32 +1,59 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '@material-ui/core';
 
-const CartProduct = ({ product }) => {
-    const [amount, setAmount] = useState(null);
+const CartProduct = ({ product, onProductAmountChange, onDeleteClick }) => {
+  const [amount, setAmount] = useState(null);
 
-    const handleIncreaseAmountButtonClick = () => {
-      setAmount(prev => prev ? prev + 1 : 2);
-    };
+  const handleProductAmountChange = () => {
+    onProductAmountChange(product.id, amount);
+  };
 
-    const handleDecreaseAmountButtonClick = () => {
-      setAmount(prev => Math.max(1, --prev));
-    };
+  const handleIncreaseAmountButtonClick = () => {
+    setAmount((prev) => (prev ? prev + 1 : 2));
+  };
 
-    return (
-        <div className="cart-product">
-            <img src={product.imageSrc} alt="img" className="cart-product__image" />
-            <div className="cart-product__right-block">
-                <div className="cart-product__name-amount">
-                  {product.name} x {amount ? amount : product.amount}
-                </div>
-                <div className="cart-product__amount-buttons">
-                  <Button size="small" onClick={handleIncreaseAmountButtonClick}>+</Button>
-                  <Button size="small" onClick={handleDecreaseAmountButtonClick}>-</Button>
-                </div>
-                <Button variant="contained" size="small" className="cart-product__delete-button">delete</Button>
-            </div>
+  const handleDecreaseAmountButtonClick = () => {
+    setAmount((prev) => Math.max(1, --prev));
+  };
+
+  useEffect(() => {
+    if (amount) {
+      handleProductAmountChange();
+    }
+  }, [amount]);
+
+  const handleDeleteCartProductButtonClick = () => {
+    if (confirm(`Удалить товар ${product.name} из корзины?`)) {
+      onDeleteClick(product.id);
+    }
+  };
+
+  return (
+    <div className="cart-product">
+      <img src={product.imageSrc} alt="img" className="cart-product__image" />
+      <div className="cart-product__right-block">
+        <div className="cart-product__name-amount">
+          {product.name} x {amount ? amount : product.amount}
         </div>
-    );
+        <div className="cart-product__amount-buttons">
+          <Button size="small" onClick={handleIncreaseAmountButtonClick}>
+            +
+          </Button>
+          <Button size="small" onClick={handleDecreaseAmountButtonClick}>
+            -
+          </Button>
+        </div>
+        <Button
+          variant="contained"
+          size="small"
+          onClick={handleDeleteCartProductButtonClick}
+          className="cart-product__delete-button"
+        >
+          delete
+        </Button>
+      </div>
+    </div>
+  );
 };
 
 export default CartProduct;
