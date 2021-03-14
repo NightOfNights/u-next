@@ -3,13 +3,9 @@
     flex-direction: column;
     margin: auto;
     gap: 20px;
-    width: 25%;
+    width: 30%;
     position: relative;
     top: 5vh;
-}
-
-.cart * {
-    margin: 0 10px;
 }
 
 .cart__header {

@@ -16,7 +16,9 @@ const CartProduct = ({ product }) => {
         <div className="cart-product">
             <img src={product.imageSrc} alt="img" className="cart-product__image" />
             <div className="cart-product__right-block">
-                {product.name} x {amount ? amount : product.amount}
+                <div className="cart-product__name-amount">
+                  {product.name} x {amount ? amount : product.amount}
+                </div>
                 <div className="cart-product__amount-buttons">
                   <Button size="small" onClick={handleIncreaseAmountButtonClick}>+</Button>
                   <Button size="small" onClick={handleDecreaseAmountButtonClick}>-</Button>
