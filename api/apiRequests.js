@@ -23,6 +23,30 @@ export const clearCart = () => {
     });
 };
 
+export const createProduct = (data) => {
+  axios
+    .post('/products/', data)
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log(err.response.data);
+      alert(err.message);
+    });
+};
+
+export const updateProduct = (id, data) => {
+  axios
+    .put(`/products/${id}`, data)
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log(err.response.data);
+      alert(err.message);
+    });
+};
+
 export const deleteCartProduct = (id) => {
   axios
     .delete(`/cart/${id}`)

@@ -1,6 +1,6 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
-import Rating from '@material-ui/lab/Rating';
+import { Button } from '@material-ui/core';
+import { Rating } from '@material-ui/lab';
 
 const Card = ({
   id,
@@ -10,13 +10,19 @@ const Card = ({
   imageSrc,
   rating,
   onBuyButtonClick,
+  onCardClick,
 }) => {
-  const handleBuyButtonClick = () => {
+  const handleBuyButtonClick = (e) => {
+    e.stopPropagation();
     onBuyButtonClick(id);
   };
 
+  const handleCardClick = () => {
+    onCardClick(id, name, price, description, imageSrc, rating);
+  };
+
   return (
-    <div className="card">
+    <div className="card" onClick={handleCardClick}>
       <img src={imageSrc} alt="img" className="card__image" />
       <div className="card__name-price-info">
         <span>{name}</span>
@@ -32,7 +38,7 @@ const Card = ({
         className="card__rating"
       />
       <Button
-        variant="outlined"
+        variant="contained"
         onClick={handleBuyButtonClick}
         className="card__button"
       >

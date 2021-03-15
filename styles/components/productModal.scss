@@ -1,0 +1,77 @@
+.product-modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 999;
+
+  &__container {
+    background: var(--basic-white);
+    padding: 30px 5px;
+    width: 20%;
+  }
+
+  &__header {
+    display: block;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 500;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  &__form-item {
+    border: none;
+    outline: none;
+    padding: 12px 0 4px;
+    margin: 0 auto;
+    width: 75%;
+    border-bottom: 1px solid var(--light-gray);
+    margin-bottom: -1px;
+    font-size: 1.1rem;
+  }
+
+  &__form-item:focus {
+    border-bottom: 1px solid var(--primary-color);
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    width: 75%;
+    margin: 0 auto;
+  }
+
+  &__footer > button {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .product-modal {
+    &__container {
+      width: 100%;
+      padding: 0;
+    }
+
+    &__form {
+      gap: 10px;
+    }
+
+    &__form-item {
+      padding: 0;
+      font-size: 0.9rem;
+    }
+  }
+}
