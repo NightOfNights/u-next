@@ -18,11 +18,13 @@ const Card = ({
   };
 
   const handleCardClick = () => {
-    onCardClick(id, name, price, description, imageSrc, rating);
+    if (onCardClick) {
+      onCardClick(id, name, price, description, imageSrc, rating);
+    }
   };
 
   return (
-    <div className="card" onClick={handleCardClick}>
+    <div className="card" style={onCardClick ? {cursor: 'pointer'} : null} onClick={handleCardClick}>
       <img src={imageSrc} alt="img" className="card__image" />
       <div className="card__name-price-info">
         <span>{name}</span>

@@ -5,23 +5,25 @@ import { useRouter } from 'next/router';
 import { CartProduct } from '../../components';
 import styles from '../../styles/Cart.module.css';
 import { getCart, clearCart, deleteCartProduct } from '../../api/apiRequests';
+import { useSession, getSession } from 'next-auth/client';
 
 const Cart = ({ cartProducts }) => {
   const [products, setProducts] = useState(cartProducts);
   const router = useRouter();
+  const [session] = useSession();
 
   const handleClearCartButtonClick = () => {
-    if (cartProducts.length) {
-      clearCart();
-      router.push(router.pathname);
+    if (products.length) {
+      clearCart(session.user.id);
+      setProducts([]);
     } else {
       alert('Cart is already empty!');
     }
   };
 
-  const handleDeleteCartProductButtonClick = (id) => {
-    deleteCartProduct(id);
-    router.push(router.pathname);
+  const handleDeleteCartProductButtonClick = (productId) => {
+    deleteCartProduct(session.user.id, productId);
+    setProducts(products.filter(product => product.id !== productId));
   };
 
   const handleProductAmountChange = (id, amount) => {
@@ -50,7 +52,7 @@ const Cart = ({ cartProducts }) => {
       </span>
     );
 
-  const cartProductList = cartProducts.map((product) => (
+  const cartProductList = products.map((product) => (
     <CartProduct
       key={product.id}
       product={product}
@@ -81,11 +83,17 @@ const Cart = ({ cartProducts }) => {
   );
 };
 
-export const getServerSideProps = async () => {
-  const cartProducts = await getCart();
-  console.log(cartProducts);
+export const getServerSideProps = async (ctx) => {
+  const session = await getSession(ctx);
 
-  return { props: { cartProducts } };
+  if (session) {
+    const cartProducts = await getCart(session.user.id);
+    console.log(cartProducts);
+  
+    return { props: { cartProducts } };
+  } else {
+    return { redirect: { permanent: false, destination: '/api/auth/signin' } };
+  }
 };
 
 export default Cart;

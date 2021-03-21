@@ -11,6 +11,7 @@ import {
 import AddIcon from '@material-ui/icons/Add';
 import React from 'react';
 import { useRouter } from 'next/router';
+import { useSession, getSession } from 'next-auth/client';
 
 const Store = ({ products }) => {
   const [isAddModalVisible, setIsAddModalVisible] = useState(false);
@@ -24,10 +25,11 @@ const Store = ({ products }) => {
     description: '',
   });
 
+  const [session] = useSession();
   const router = useRouter();
 
-  const handleBuyButtonClick = (id) => {
-    addProductToCart(id);
+  const handleBuyButtonClick = (productId) => {
+    addProductToCart(session.user.id, productId);
   };
 
   const handleCardClick = (id, name, price, description, imageSrc, rating) => {
@@ -72,7 +74,7 @@ const Store = ({ products }) => {
       key={product.id}
       {...product}
       onBuyButtonClick={handleBuyButtonClick}
-      onCardClick={handleCardClick}
+      onCardClick={session.user.role === 'admin' ? handleCardClick : undefined}
     />
   ));
 
@@ -80,9 +82,11 @@ const Store = ({ products }) => {
     <MainLayout>
       <div className={styles.container}>
         {productsList}
-        <button className={styles.addButton} onClick={handleAddButtonClick}>
-          <AddIcon></AddIcon>
-        </button>
+        {session.user.role === 'admin' ? (
+          <button className={styles.addButton} onClick={handleAddButtonClick}>
+            <AddIcon></AddIcon>
+          </button>
+        ) : undefined}
         {isAddModalVisible ? (
           <ProductModal
             add
@@ -106,9 +110,15 @@ const Store = ({ products }) => {
   );
 };
 
-export const getServerSideProps = async () => {
-  const products = await getProducts();
-  return { props: { products } };
+export const getServerSideProps = async (ctx) => {
+  const session = await getSession(ctx);
+
+  if (session) {
+    const products = await getProducts();
+    return { props: { products } };
+  } else {
+    return { redirect: { permanent: false, destination: '/api/auth/signin' } };
+  }
 };
 
 export default Store;

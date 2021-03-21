@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import { signOut } from 'next-auth/client';
 
 const Navbar = () => {
   return (
@@ -13,6 +14,9 @@ const Navbar = () => {
       <Link href={'/cart'}>
         <a className="navbar__item">Cart</a>
       </Link>
+      <div className="navbar__item" onClick={signOut}>
+        Sign out
+      </div>
     </div>
   );
 };

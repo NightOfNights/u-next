@@ -5,14 +5,29 @@ export async function getProducts() {
   return products;
 }
 
-export async function getCart() {
-  const cart = await axios.get('/cart').then((res) => res.data);
+export async function getCart(userId) {
+  const cart = await axios.get(`/cart/${userId}`).then((res) => res.data);
   return cart;
 }
 
-export const clearCart = () => {
+export async function getUserByEmail(email) {
+  const user = axios
+    .get(`users/email/${email}`)
+    .then((res) => {
+      console.log(res.data);
+      return res.data;
+    })
+    .catch((err) => {
+      console.log(err);
+      alert(err.message);
+    });
+
+    return user;
+}
+
+export const clearCart = (userId) => {
   axios
-    .delete('/cart')
+    .delete(`/cart/${userId}`)
     .then((res) => {
       console.log(res);
       alert('Cart cleared');
@@ -47,9 +62,9 @@ export const updateProduct = (id, data) => {
     });
 };
 
-export const deleteCartProduct = (id) => {
+export const deleteCartProduct = (userId, productId) => {
   axios
-    .delete(`/cart/${id}`)
+    .delete(`/cart/${userId}/product/${productId}`)
     .then((res) => console.log(res))
     .catch((err) => {
       console.log(err);
@@ -57,9 +72,9 @@ export const deleteCartProduct = (id) => {
     });
 };
 
-export const addProductToCart = (id) => {
+export const addProductToCart = (userId, productId) => {
   axios
-    .put(`/cart/${id}`)
+    .put(`/cart/${userId}/product/${productId}`)
     .then((res) => {
       console.log(res);
       alert('Product added to the cart!');
