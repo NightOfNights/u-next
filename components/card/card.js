@@ -24,7 +24,11 @@ const Card = ({
   };
 
   return (
-    <div className="card" style={onCardClick ? {cursor: 'pointer'} : null} onClick={handleCardClick}>
+    <div
+      className="card"
+      style={onCardClick ? { cursor: 'pointer' } : null}
+      onClick={handleCardClick}
+    >
       <img src={imageSrc} alt="img" className="card__image" />
       <div className="card__name-price-info">
         <span>{name}</span>

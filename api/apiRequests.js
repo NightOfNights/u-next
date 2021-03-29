@@ -22,7 +22,7 @@ export async function getUserByEmail(email) {
       alert(err.message);
     });
 
-    return user;
+  return user;
 }
 
 export const clearCart = (userId) => {

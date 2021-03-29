@@ -14,8 +14,8 @@ export default function Home() {
 export const getServerSideProps = async (ctx) => {
   const session = await getSession(ctx);
 
-    if (session) {  
-    return { props: {  } };
+  if (session) {
+    return { props: {} };
   } else {
     return { redirect: { permanent: false, destination: '/api/auth/signin' } };
   }

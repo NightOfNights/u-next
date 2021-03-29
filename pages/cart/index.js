@@ -23,7 +23,7 @@ const Cart = ({ cartProducts }) => {
 
   const handleDeleteCartProductButtonClick = (productId) => {
     deleteCartProduct(session.user.id, productId);
-    setProducts(products.filter(product => product.id !== productId));
+    setProducts(products.filter((product) => product.id !== productId));
   };
 
   const handleProductAmountChange = (id, amount) => {
@@ -89,7 +89,7 @@ export const getServerSideProps = async (ctx) => {
   if (session) {
     const cartProducts = await getCart(session.user.id);
     console.log(cartProducts);
-  
+
     return { props: { cartProducts } };
   } else {
     return { redirect: { permanent: false, destination: '/api/auth/signin' } };

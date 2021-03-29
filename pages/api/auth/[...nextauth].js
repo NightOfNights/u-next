@@ -26,6 +26,6 @@ export default (req, res) =>
         session.user.id = id;
         session.user.role = role;
         return session;
-      }
-    }
+      },
+    },
   });
