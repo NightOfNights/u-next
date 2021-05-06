@@ -1,6 +1,12 @@
 .container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 5vw;
-    padding: 3vh 5vw;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-auto-rows: 1fr;
+  gap: 5vw;
+  padding: 3vh 5vw;
+}
+
+.addButton {
+  margin: 5px;
+  cursor: pointer;
 }

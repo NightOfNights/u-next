@@ -7,9 +7,11 @@ body {
   --light-gray: rgba(23, 23, 25, 0.3);
   --chocolate-color: #d2691e;
   --darker-chocolate-color: #c35f14;
+  --danger: #df4759;
   padding: 0;
   margin: 0;
-  font-family: Roboto, Oxygen, -apple-system, BlinkMacSystemFont, Segoe UI, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: Roboto, Oxygen, -apple-system, BlinkMacSystemFont, Segoe UI,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   font-size: 16px;
 }
 
