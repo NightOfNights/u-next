@@ -22,9 +22,12 @@ export default (req, res) =>
 
       async session(session) {
         console.log('test', session);
-        const { id, role } = await getUserByEmail(session.user.email);
-        session.user.id = id;
-        session.user.role = role;
+        let userData;
+        while (!userData) {
+          userData = await getUserByEmail(session.user.email);
+        }
+        session.user.id = userData.id;
+        session.user.role = userData.role;
         return session;
       },
     },

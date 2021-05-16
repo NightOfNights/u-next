@@ -19,7 +19,6 @@ export async function getUserByEmail(email) {
     })
     .catch((err) => {
       console.log(err);
-      alert(err.message);
     });
 
   return user;
