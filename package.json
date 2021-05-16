@@ -18,7 +18,7 @@
     "@supabase/supabase-js": "^1.11.13",
     "axios": "^0.21.1",
     "cookie": "^0.4.1",
-    "next": "10.0.6",
+    "next": "^10.2.0",
     "next-auth": "^3.13.2",
     "node-sass": "^4.14.1",
     "react": "17.0.1",
